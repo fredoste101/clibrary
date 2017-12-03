@@ -1,0 +1,51 @@
+#include<stdio.h>
+
+int rc4_S[256];
+int rc4_i;
+int rc4_j;
+
+void swap_int(int * a, int * b)
+{
+	int temp;
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void rc4_init(int * key, int keylen)
+{
+	int i, j;
+
+	rc4_i = 0;
+	rc4_j = 0;
+
+	for(i=0; i < 256; i++)
+	{
+		rc4_S[i] = i;
+	}
+
+	j = 0;
+	for(i=0;i<256;i++)
+	{
+		j = (j + rc4_S[i] + key[i % keylen]) % 256;
+		swap_int(&rc4_S[i], &rc4_S[j]);
+	}
+}
+
+int rc4_byte(int input)
+{
+	int k;
+
+	rc4_i = (rc4_i + 1) % 256;
+	rc4_j = (rc4_j + rc4_S[rc4_i]) % 256;
+
+	swap_int(&rc4_S[rc4_i], &rc4_S[rc4_j]);
+	
+	k = rc4_S[rc4_S[rc4_i] + rc4_S[rc4_j]] % 256;
+
+	printf("\nReturn %d xored with %d\n", input, k);
+	return input ^ k;
+}
+
+
+
