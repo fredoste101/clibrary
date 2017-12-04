@@ -5,19 +5,33 @@ int char_2_int(char c);
 
 int string_2_int(char * string)
 {
-	int j;
+	int digits = strlen(string) - 1;
 	int return_value = 0;
+	int negative = 0;
+	int digitValue = 1;
 
-	int length = strlen(string);
-	int temp = length - 1;
-	
-	for(j = 0; j <= temp; j++)
+	if(*string == '-')
 	{
-		return_value += char_2_int(string[j]) * (int)floor(pow(10, length-1));
-		length--;
+		negative = 1;
+	}
+	
+
+	
+	
+	for(digits; digits >= negative; digits--)
+	{
+		return_value += char_2_int(string[digits]) * digitValue;
+		digitValue *= 10;
 	}
 
-	return return_value;
+	if(negative)
+	{
+		return return_value * (-1);
+	}
+	else
+	{
+		return return_value;
+	}
 }
 
 int char_2_int(char c)
