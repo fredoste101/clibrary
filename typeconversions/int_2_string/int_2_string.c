@@ -7,8 +7,21 @@ char int_2_char(int num);
 
 char * int_2_string(int num)
 {
-	int digits = num_digits(num);
+	int digits;
 
+	if(num == 0)
+	{
+		digits = 1;
+	}
+	else if(num < 0)
+	{
+		digits = num_digits((-1) * num) + 1;
+	}
+	else
+	{
+		digits = num_digits(num);
+	}
+	
 	char * string = (char *)malloc(sizeof(char) * digits + 1 * sizeof(char));
 	fill_string(string, num, digits);	
 
@@ -23,14 +36,28 @@ int num_digits(int num)
 void fill_string(char * string, int num, int digits)
 {
 	int digit;
-	for(digits; digits > 0; digits--)
+	int digitValue = 10;
+	int rest = 0;
+	int negative = 0;
+
+	if(num < 0)
 	{
-		digit = num / pow(10, digits-1);
-		*string = int_2_char(digit);
-		num -= digit * pow(10, digits-1);
-		string++;
+		negative = 1;
+		string[0] = '-';
+		num *= (-1);
 	}
-	*string = '\0';
+
+	string[digits] = '\0';
+	digits--;
+	
+	
+	for(digits; digits >= negative; digits--)
+	{
+		rest = num % digitValue;
+		string[digits] = int_2_char(rest / (digitValue / 10));
+		digitValue *= 10;
+		num -= rest;
+	}
 }
 
 char int_2_char(int num)
