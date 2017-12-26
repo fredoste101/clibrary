@@ -15,6 +15,8 @@ int main()
 
 	char * stringList[] = {"This ", "is ", "a ", "concatinated ", "\t","string", "\n"};
 
-	printf("\n |%s| \n", concatinate(stringList, 7));
+	printf("\n |%s| \n", concatinateList(stringList, 7));
+
+	printf("\nTwo concatinated strings: %s\n", concatinate("hello ", "world-"));
 	
 }
