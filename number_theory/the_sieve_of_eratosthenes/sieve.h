@@ -6,8 +6,8 @@
 
 typedef struct s
 {
-	unsigned long size;
-	unsigned long * list;
+	unsigned long long size;
+	unsigned long long * list;
 } prime_list;
 
-prime_list * prime_number_list(unsigned long to_number);
+prime_list * prime_number_list(unsigned long long to_number);

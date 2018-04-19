@@ -16,13 +16,13 @@ int main()
 
 	test = prime_number_list(100);
 
-	printf("\nSize of created sieve: %lu\n", test->size);
+	printf("\nSize of created sieve: %llu\n", test->size);
 
 	int i = 0;
 
 	for(i < 0; i < test->size; i++)
 	{
-		printf(" %lu \n", test->list[i]);
+		printf(" %llu \n", test->list[i]);
 	}
 
 	printf("\n\n");
